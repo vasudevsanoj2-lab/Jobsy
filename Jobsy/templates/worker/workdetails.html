@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Work Requests</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        /* ⭐ Soft Cream & Light Texture Background */
+        background: #f5f0e6;
+        background-image:
+            radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.5) 0, transparent 45%);
+        background-attachment: fixed;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #0f8f8f;
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    .back-btn:hover {
+        background: #0c7474;
+        transform: translateY(-2px);
+    }
+
+    .back-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .wrapper {
+        width: 95%;
+        max-width: 1100px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 30px;
+        margin: auto;
+        border-radius: 15px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+        color: #0f3f3f;
+        font-weight: 700;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0px 3px 15px rgba(0,0,0,0.17);
+    }
+
+    th {
+        padding: 14px;
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        color: white;
+        font-size: 15px;
+        text-align: left;
+        letter-spacing: 0.5px;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #ececec;
+        color: #333;
+        font-size: 14px;
+    }
+
+    tr:hover td {
+        background: #f1faf9;
+        transition: 0.3s;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 7px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    .send-btn {
+        background: #0f8f8f;
+    }
+
+    .send-btn:hover {
+        background: #0c7474;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+{#<button class="back-btn" onclick="history.back()">#}
+{#    <span class="back-arrow">&#8592;</span>#}
+{#    Back#}
+{#</button>#}
+
+<a href="{% url 'worker_page' %}" class="back-btn">
+    <span class="back-arrow">&#8592;</span>
+    Back
+</a>
+
+<div class="wrapper">
+    <h2>Available Work Requests</h2>
+
+    <form id="form1" name="form1" method="post" action="">
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Work Name</th>
+                <th>Details</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+
+            {% for i in value %}
+            <tr>
+                <td>{{ i.user_id.name }}</td>
+                <td>{{ i.work_name }}</td>
+                <td>{{ i.details }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.time }}</td>
+                <td>{{ i.price }}</td>
+                <td>
+                    <a href="/send_work_request/{{ i.id }}" class="btn send-btn">
+                        Send Request
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

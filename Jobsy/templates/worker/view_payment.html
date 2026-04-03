@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="410" height="87" border="1">
+  <tr>
+    <td>username</td>
+    <td>payment</td>
+    <td>date</td>
+  </tr>
+    {% for i in val %}
+  <tr>
+    <td>{{ i.user_id.name }}</td>
+    <td>&nbsp;{{ i.payment }}</td>
+    <td>&nbsp;{{ i.date }}</td>
+  </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

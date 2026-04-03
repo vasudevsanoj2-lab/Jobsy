@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skill Request Dashboard</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #f7f3e9;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #0f8f8f;
+        color: #ffffff;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    .back-btn:hover {
+        background: #0c6f6f;
+        transform: translateY(-2px);
+    }
+
+    .back-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 900px;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+        border: 1px solid #e6dfd3;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 28px;
+        color: #524a3a;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th {
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        color: #fff;
+        padding: 12px;
+        text-align: left;
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 12px;
+        font-size: 15px;
+        color: #4a4a4a;
+        border-bottom: 1px solid #e5dcc9;
+    }
+
+    tr:hover {
+        background: #f2ece1;
+        transition: 0.2s;
+    }
+
+    .btn {
+        padding: 7px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .accept { background: #27ae60; }
+    .accept:hover { background: #1e8c4c; }
+
+    .reject { background: #e74c3c; }
+    .reject:hover { background: #c0392b; }
+
+    .update { background: #2980b9; }
+    .update:hover { background: #1f6693; }
+
+    .complaint { background: #8e44ad; }
+    .complaint:hover { background: #6f3488; }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON (GOES TO WORKER PAGE) -->
+<a href="{% url 'worker_page' %}" class="back-btn">
+    <span class="back-arrow">&#8592;</span>
+    Back
+</a>
+
+<div class="container">
+    <h2>Skill Request Dashboard</h2>
+
+    <table>
+        <tr>
+            <th>Skill</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in value %}
+        <tr>
+            <td>{{ i.skill.skill }}</td>
+            <td>{{ i.user_id.name }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.description }}</td>
+            <td>
+
+                {% if i.status == 'pending' %}
+                    <a href="/accept_skill_request/{{ i.id }}" class="btn accept">Accept</a>
+                    <a href="/reject_skill_request/{{ i.id }}" class="btn reject">Reject</a>
+
+                {% elif i.status == 'Accepted' %}
+                    <a href="/update_status/{{ i.id }}" class="btn update">Update</a>
+                    <span style="color:#524a3a; font-weight:600;">{{ i.status }}</span>
+                {% else %}
+                    <span style="color:#524a3a; font-weight:600;">{{ i.status }}</span>
+                {% endif %}
+
+                <br>
+                <a href="/send_complaint/{{ i.id }}" class="btn complaint">Send Complaint</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

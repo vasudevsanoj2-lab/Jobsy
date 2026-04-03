@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Worker Skill List</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: "Poppins", sans-serif;
+    background: #eef2f6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* BACK BUTTON */
+.back-btn {
+    position: fixed;
+    top: 25px;
+    left: 30px;
+    padding: 10px 18px;
+    background: #103b78;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(16,59,120,0.25);
+    transition: 0.25s ease;
+    z-index: 999;
+}
+
+.back-btn:hover {
+    background: #0b2d5a;
+    transform: translateY(-2px);
+}
+
+.container {
+    width: 95%;
+    max-width: 800px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid #dbe3ec;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #103b78;
+}
+
+/* SEARCH BAR */
+.search-box {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px 14px 10px 40px;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #cbd6e2;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%230b63c7' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #103b78;
+    color: #ffffff;
+    padding: 14px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 4px solid #4da3ff;
+}
+
+td {
+    padding: 13px;
+    font-size: 15px;
+    border-bottom: 1px solid #e1e8f0;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background: #f7faff;
+}
+
+tr:hover {
+    background: #e8f2ff;
+    transition: 0.25s;
+}
+
+a {
+    color: #0b63c7;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">&larr; Back</a>
+
+<div class="container">
+
+<h2>Worker Skills</h2>
+
+<div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by location or skill..."
+        onkeyup="filterTable()" />
+</div>
+
+<form method="post">
+<table id="skillTable">
+    <tr>
+        <th>Worker Name</th>
+        <th>Place</th>
+        <th>Skill</th>
+        <th>Experience</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in value %}
+    <tr>
+        <td>{{ i.worker_id.name }}</td>
+        <td>{{ i.worker_id.place }}</td>
+        <td>{{ i.skill }}</td>
+        <td>{{ i.experience }}</td>
+        <td><a href="/user_send_request/{{ i.id }}">Send</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+
+</div>
+
+<script>
+function filterTable() {
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const rows = document.getElementById("skillTable").getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+        const place = rows[i].getElementsByTagName("td")[1];
+        const skill = rows[i].getElementsByTagName("td")[2];
+
+        if (place && skill) {
+            const placeText = place.innerText.toLowerCase();
+            const skillText = skill.innerText.toLowerCase();
+
+            rows[i].style.display =
+                placeText.includes(filter) || skillText.includes(filter)
+                    ? ""
+                    : "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

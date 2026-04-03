@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table width="496" height="133" border="1">
+    <tr>
+      <td>SKILL</td>
+      <td>EXPERIENCE</td>
+      <td>ACTION</td>
+    </tr>
+      {% for i in val %}
+    <tr>
+      <td>&nbsp;{{ i.skill }}</td>
+      <td>&nbsp;{{ i.experience }}</td>
+      <td><p><a href="/edit_skill/{{ i.id}}">edit</a></p>
+        <p><a href="/delete_skill/{{ i.id }}">delete</a></p></td>
+    </tr>
+      {%  endfor %}
+  </table>
+  <table width="496" height="27" border="1">
+    <tr>
+      <td> <div align="center"><a href="/add_new">Add New</a></div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

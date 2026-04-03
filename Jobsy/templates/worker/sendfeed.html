@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Send Feedback</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+
+        /* 🌼 Smooth clean cream background */
+        background: #f8f4e8;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    .back-btn:hover {
+        background: linear-gradient(90deg, #0d7c7c, #119c9c);
+        transform: translateY(-2px);
+    }
+
+    .back-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .form-container {
+        width: 90%;
+        max-width: 450px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        border: 1px solid #e6dfd3;
+        overflow: hidden;
+    }
+
+    /* Gradient Heading */
+    .header {
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        padding: 18px;
+        text-align: center;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .content {
+        padding: 25px;
+    }
+
+    label {
+        font-size: 15px;
+        font-weight: 500;
+        color: #4a4a4a;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 140px;
+        border-radius: 10px;
+        border: 1px solid #d6ccb8;
+        padding: 12px;
+        font-size: 15px;
+        outline: none;
+        resize: none;
+        background: #fefcf7;
+        font-family: "Poppins", sans-serif;
+    }
+
+    textarea:focus {
+        border-color: #14b3b3;
+        box-shadow: 0 0 6px rgba(20, 179, 179, 0.4);
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 18px;
+        padding: 12px 0;
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .btn:hover {
+        background: linear-gradient(90deg, #0d7c7c, #119c9c);
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+{#<button class="back-btn" onclick="history.back()">#}
+{#    <span class="back-arrow">&#8592;</span>#}
+{#    Back#}
+{#</button>#}
+
+<a href="{% url 'worker_page' %}" class="back-btn">
+    <span class="back-arrow">&#8592;</span>
+    Back
+</a>
+
+<div class="form-container">
+
+    <!-- Title bar with gradient -->
+    <div class="header">Send Feedback</div>
+
+    <div class="content">
+        <form method="post" action="send_feedback_worker_post">
+            {% csrf_token %}
+
+            <label>Feedback</label>
+            <textarea name="textarea" placeholder="Write your feedback here..." required></textarea>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

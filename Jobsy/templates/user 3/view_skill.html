@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table width="300" border="1">
+    <tr>
+      <td>workername</td>
+      <td>skill</td>
+      <td>experience</td>
+      <td>action</td>
+    </tr>
+    <tr>
+        {% for i in value %}
+      <td>&nbsp;{{ i.worker_id.id }}</td>
+      <td>{{ i.skill }}&nbsp;</td>
+      <td>&nbsp;{{ i.experience }}</td>
+      <td><a href="/user_send_request/{{ i.id }}">send</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>

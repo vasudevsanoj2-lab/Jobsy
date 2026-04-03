@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Add New Work</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #eef2f6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    /* ==============================
+       BACK BUTTON ? TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: #103b78;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(16,59,120,0.25);
+        transition: 0.25s ease;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    /* ==============================
+       HOME BUTTON ? TOP RIGHT
+    ============================== */
+    .home-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 22px;
+        background: #103b78;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(16,59,120,0.3);
+        transition: 0.25s ease;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .home-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    .home-icon {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    /* ==============================
+       FORM CONTAINER
+    ============================== */
+    .container {
+        width: 450px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid #dbe3ec;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #103b78;
+        font-weight: 600;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding: 10px 0;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .label {
+        color: #103b78;
+        font-weight: 600;
+        width: 140px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"] {
+        width: 95%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #c7d4e2;
+        outline: none;
+        font-size: 15px;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="time"]:focus {
+        border-color: #103b78;
+        box-shadow: 0 0 5px rgba(16,59,120,0.3);
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background: #103b78;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        margin-top: 12px;
+    }
+
+    input[type="submit"]:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'work_details' %}" class="back-btn">&larr; Back</a>
+
+<!-- HOME BUTTON -->
+<a href="{% url 'user_page' %}" class="home-btn">
+    <span class="home-icon">&#8962;</span> HOME
+</a>
+
+<div class="container">
+
+<h2>Add New Work</h2>
+
+<form id="form1" name="form1" method="post" action="add_newwork_post">
+  {% csrf_token %}
+  <table>
+
+    <tr>
+      <td class="label">Work Name</td>
+      <td>
+        <input type="text" name="textfield"
+               required="required"
+               pattern="[A-Z a-z.]{3,25}" />
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Details</td>
+      <td>
+        <input type="text" name="textfield2"
+               required="required"
+               pattern="[A-Za-z0-9 ,.-]{5,100}"/>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Date</td>
+      <td>
+        <input type="date" name="textfield3"
+               required="required" />
+      </td>
+    </tr>
+
+    <tr>
+      <td class="label">Time</td>
+      <td><input type="time" name="textfield4" /></td>
+    </tr>
+
+    <tr>
+      <td class="label">Price</td>
+      <td><input type="text" name="textfield5" /></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Submit" />
+      </td>
+    </tr>
+
+  </table>
+</form>
+
+</div>
+
+</body>
+</html>

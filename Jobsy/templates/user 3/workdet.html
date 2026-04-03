@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Work List</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins";
+        background: #eef2f6;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: #103b78;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(16,59,120,0.25);
+        transition: 0.25s ease;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    .container {
+        width: 95%;
+        max-width: 900px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid #dbe3ec;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    th {
+        background: #103b78;
+        color: white;
+        padding: 14px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: 3px solid #4da3ff;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #e1e8f0;
+        font-size: 15px;
+    }
+
+    tr:nth-child(even) {
+        background: #f7faff;
+    }
+
+    tr:hover {
+        background: #e8f2ff;
+        transition: 0.25s;
+    }
+
+    a {
+        color: #103b78;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #0b63c7;
+        text-decoration: underline;
+    }
+
+    .add-btn {
+        background: #103b78;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 8px;
+        display: inline-block;
+        font-weight: 600;
+        transition: 0.25s;
+        text-decoration: none;
+    }
+
+    .add-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    .center {
+        text-align: center;
+        padding: 15px 0;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">&larr; Back</a>
+
+<div class="container">
+
+<table>
+<tr>
+  <th>Work Name</th>
+  <th>Details</th>
+  <th>Date</th>
+  <th>Time</th>
+  <th>Price</th>
+  <th>Action</th>
+</tr>
+
+{% for i in value %}
+<tr>
+  <td>{{ i.work_name }}</td>
+  <td>{{ i.details }}</td>
+  <td>{{ i.date }}</td>
+  <td>{{ i.time }}</td>
+  <td>{{ i.price }}</td>
+  <td>
+    <a href="/edit/{{ i.id }}">Edit</a><br>
+    <a href="/delete/{{ i.id }}">Delete</a>
+  </td>
+</tr>
+{% endfor %}
+
+<tr>
+  <td colspan="6" class="center">
+    <a href="Add_newwork" class="add-btn">Add New Work</a>
+  </td>
+</tr>
+
+</table>
+
+</div>
+</body>
+</html>

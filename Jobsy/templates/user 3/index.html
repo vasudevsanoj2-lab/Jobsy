@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* ========================================= */
+/* CORPORATE JOB PORTAL THEME */
+/* ========================================= */
+:root {
+    --bg: #F5F7FA;
+    --text: #1E2A35;
+    --primary: #2A4D69;
+    --primary-light: #4B86B4;
+    --card: rgba(255,255,255,0.7);
+    --border: rgba(0,0,0,0.15);
+    --shadow: rgba(0,0,0,0.12);
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+    height: 800px; /* INCREASED */
+}
+
+/* ========================================= */
+/* ANIMATED IMAGES BEHIND DASHBOARD TITLE */
+/* ========================================= */
+.animated-header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 800px; /* INCREASED */
+    overflow: hidden;
+    z-index: -2;
+}
+
+.animated-header-bg img {
+    position: absolute;
+    width: 100%;
+    height: 800px; /* INCREASED */
+    object-fit: cover;
+    opacity: 0;
+    animation: fadeSlide 15s infinite;
+}
+
+/* Rotation */
+.animated-header-bg img:nth-child(1) { animation-delay: 0s; }
+.animated-header-bg img:nth-child(2) { animation-delay: 5s; }
+.animated-header-bg img:nth-child(3) { animation-delay: 10s; }
+
+/* Fade Animation */
+@keyframes fadeSlide {
+    0% { opacity: 0; }
+    20% { opacity: 0.9; }
+    40% { opacity: 0.9; }
+    60% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 800px; /* INCREASED */
+    width: 100%;
+    background: rgba(0,0,0,0.45);
+    z-index: -1;
+}
+
+/* ========================================= */
+/* HEADER */
+/* ========================================= */
+.header {
+    padding: 70px 20px;
+    text-align: center;
+    color: white;
+    height: 650px; /* INCREASED */
+    position: relative;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 900;
+    margin-top: 120px;
+}
+
+.header-sub {
+{#    opacity: 0.9;#}
+    font-size: 19px;
+    margin-top: 10px;
+}
+
+/* ========================================= */
+/* MAIN FLEX LAYOUT */
+/* ========================================= */
+.main-wrapper {
+    display: flex;
+    gap: 60px;
+    padding: 60px 60px;
+    justify-content: space-between;
+}
+
+/* LEFT TEXT */
+.main-text {
+    flex: 1;
+    font-size: 20px;
+    line-height: 1.8;
+    padding-top: 20px;
+}
+
+/* RIGHT IMAGE SLOTS */
+.image-area {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.image-slot {
+    width: 320px;
+    height: 200px;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.05);
+    border: 2px dashed #b6b6b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7a7a7a;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* ========================================= */
+/* CARD MENU */
+/* ========================================= */
+.menu-section {
+    padding: 40px 20px 90px;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 40px;
+}
+
+.card-wrapper {
+    max-width: 1050px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.card {
+    width: 260px;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text);
+    text-decoration: none;
+    box-shadow: 0 4px 20px var(--shadow);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-light);
+    color: var(--primary);
+    box-shadow: 0 6px 25px rgba(42, 77, 105, 0.25);
+}
+
+.card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logout {
+    background: #ff4d4d;
+    color: white;
+}
+.logout:hover {
+    background: #ff1a1a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="animated-header-bg">
+    <img src="static/images/user5.png">
+    <img src="static/images/userimg1.jpg">
+    <img src="static/images/userimg2.jpg">
+</div>
+
+<div class="header-overlay"></div>
+
+<div class="header">
+    <h1 class="header-title">User Dashboard</h1>
+    <p class="header-sub">Your Tools • Your Services • Your Requests</p>
+</div>
+
+<div class="main-wrapper">
+
+    <div class="main-text">
+        <h2 style="color:var(--primary); font-size:34px; margin-bottom:15px;">About Jobsy</h2>
+
+        Jobsy is a digital platform built to support <b>daily wage workers</b>.
+        Workers can apply for open jobs, communicate with employers, track job progress, manage work history,
+        and access genuine opportunities to improve their daily income.
+        <br><br>
+        Our mission is to create a transparent and easy job-connection system for job seekers and employers.
+    </div>
+
+    <div class="image-area">
+        <img class="image-slot" src="static/images/user4.png">
+        <img class="image-slot" src="static/images/user3.png">
+        <img class="image-slot" src="static/images/user6.png">
+        <img class="image-slot" src="static/images/user7.png">
+    </div>
+
+</div>
+
+<div class="menu-section">
+
+    <div class="menu-title">Quick Actions</div>
+
+    <div class="card-wrapper">
+        <a href="/view_reply_user" class="card">View Reply</a>
+        <a href="/view_skill" class="card">View Skills</a>
+        <a href="/view_request_status_user" class="card">Request Status</a>
+        <a href="/user_chat_withworker" class="card">Chat With Worker</a>
+        <a href="/send_feedback" class="card">Send Feedback</a>
+        <a href="/work_details" class="card">Manage Work</a>
+        <a href="/view_workrequest" class="card">View Work Request</a>
+        <a href="/logout" class="card logout">Logout</a>
+    </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add("in-view"); }
+    });
+},{threshold:0.2});
+
+document.querySelectorAll(".card").forEach(card=>{
+    observer.observe(card);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Pay ₹{{ amount }} for your request</h2>
+
+    <form action="{% url 'request_payment_success' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="request_id" value="{{ request_obj.id }}">
+
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key }}"
+            data-amount="{{ payment.amount }}"
+            data-currency="INR"
+            data-order_id="{{ payment.id }}"
+            data-buttontext="Pay with Razorpay"
+            data-name="AgroShop"
+            data-description="Request Payment"
+            data-theme.color="#F37254">
+        </script>
+    </form>
+</body>
+</html>

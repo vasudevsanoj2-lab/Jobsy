@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Complaints</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #eef2f6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        color: #333;
+    }
+
+    /* ==============================
+       BACK BUTTON
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: #103b78;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(16,59,120,0.25);
+        transition: 0.25s ease;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    /* ==============================
+       CONTAINER
+    ============================== */
+    .container {
+        width: 90%;
+        max-width: 900px;
+        background: #ffffff;
+        padding: 25px 30px;
+        border-radius: 16px;
+        border: 1px solid #dbe3ec;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #103b78;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    /* ==============================
+       TABLE STYLES
+    ============================== */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 12px 14px;
+        text-align: left;
+    }
+
+    th {
+        background: #103b78;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+        background: #f5f8fc;
+    }
+
+    tr:hover {
+        background: #eef4ff;
+    }
+
+    td {
+        border-bottom: 1px solid #dbe3ec;
+        vertical-align: top;
+    }
+
+    /* ==============================
+       ACTION BUTTON
+    ============================== */
+    .reply-btn {
+        display: inline-block;
+        padding: 6px 14px;
+        background: #103b78;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: 0.25s;
+    }
+
+    .reply-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-1px);
+    }
+
+    /* ==============================
+       EMPTY STATE
+    ============================== */
+    .empty {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        font-style: italic;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">&larr; Back</a>
+
+<div class="container">
+    <h2>Incoming Complaints</h2>
+
+    <form id="form1" name="form1" method="post" action="">
+        <table>
+            <tr>
+                <th>Worker Name</th>
+                <th>Complaint</th>
+                <th>Reply</th>
+                <th>Action</th>
+            </tr>
+
+            {% for i in value %}
+            <tr>
+                <td>{{ i.worker_id.name }}</td>
+                <td>{{ i.complaint }}</td>
+                <td>
+                    {% if i.reply %}
+                        {{ i.reply }}
+                    {% else %}
+                        <span style="color:#999;">Not replied yet</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/incomingcomplaintreply/{{ i.id }}" class="reply-btn">
+                        Reply
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            {% if value|length == 0 %}
+            <tr>
+                <td colspan="4" class="empty">No complaints found</td>
+            </tr>
+            {% endif %}
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

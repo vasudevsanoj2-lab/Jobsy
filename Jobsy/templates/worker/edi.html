@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Edit Skill</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        background: #f5f0e6;
+        background-image:
+            radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255,255,255,0.5) 0, transparent 45%);
+        background-attachment: fixed;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #0f8f8f;
+        color: #ffffff;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #0c6f6f;
+        transform: translateY(-2px);
+    }
+
+    .back-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    /* ==============================
+       HOME BUTTON – MATCHED STYLE
+    ============================== */
+    .home-btn {
+        position: fixed;
+        top: 25px;
+        right: 30px;
+        padding: 10px 22px;
+        background: #0f8f8f;
+        color: #ffffff;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.5px;
+        z-index: 999;
+    }
+
+    .home-btn:hover {
+        background: #0c6f6f;
+        transform: translateY(-2px);
+    }
+
+    .home-icon {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .wrapper {
+        width: 90%;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 30px;
+        margin: auto;
+        border-radius: 15px;
+        backdrop-filter: blur(6px);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+        color: #0f3f3f;
+        font-weight: 700;
+    }
+
+    label {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        color: #0f3f3f;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border: 1.4px solid #b5b5b5;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0f8f8f;
+        box-shadow: 0px 0px 6px rgba(15, 143, 143, 0.5);
+        outline: none;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(90deg, #0f8f8f, #14b3b3);
+        color: white;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-submit:hover {
+        background: linear-gradient(90deg, #0c6f6f, #119797);
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'manage_skill_worker' %}" class="back-btn">
+    <span class="back-arrow">&#8592;</span>
+    Back
+</a>
+
+<!-- HOME BUTTON -->
+<a href="{% url 'worker_page' %}" class="home-btn">
+    <span class="home-icon">&#8962;</span> HOME
+</a>
+
+<div class="wrapper">
+
+    <h2>Edit Skill</h2>
+
+    <form method="post" action="/edit_skill_post">
+        {% csrf_token %}
+
+        <label>Skill</label>
+        <input type="text" name="textfield" value="{{ val.skill }}" required
+               pattern="^[A-Za-z\s\-]{2,50}$"/>
+
+        <label>Experience</label>
+        <input type="text" name="textfield2" value="{{ val.experience }}" required
+               pattern="^([0-9]|[1-4][0-9]|50)(\.[0-9]{1,2})?$" />
+
+        <button type="submit" class="btn-submit">Update Skill</button>
+    </form>
+
+</div>
+
+</body>
+</html>

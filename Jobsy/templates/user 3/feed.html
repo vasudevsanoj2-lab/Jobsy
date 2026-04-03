@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Feedback Form</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #eef2f6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    /* ==============================
+       BACK BUTTON ? TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: #103b78;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(16,59,120,0.25);
+        transition: 0.25s ease;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+
+    .container {
+        width: 400px;
+        background: #ffffff;
+        padding: 25px 30px;
+        border-radius: 16px;
+        border: 1px solid #dbe3ec;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 10px 0;
+        font-size: 15px;
+        color: #333;
+        vertical-align: top;
+    }
+
+    .label-text {
+        color: #103b78;
+        font-weight: 600;
+    }
+
+    textarea {
+        width: 95%;
+        height: 120px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #c7d4e2;
+        font-size: 15px;
+        outline: none;
+        resize: vertical;
+    }
+
+    textarea:focus {
+        border-color: #103b78;
+        box-shadow: 0 0 5px rgba(16, 59, 120, 0.3);
+    }
+
+    input[type="submit"] {
+        background: #103b78;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+        background: #0b63c7;
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">&larr; Back</a>
+
+<div class="container">
+
+<form id="form1" name="form1" method="post" action="send_feedback_post">
+  <table>
+    <tr>
+      <td class="label-text">Feedback</td>
+      <td><textarea name="textarea"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Submit" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+</div>
+
+</body>
+</html>

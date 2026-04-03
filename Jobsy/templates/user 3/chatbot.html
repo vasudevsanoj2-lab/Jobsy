@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JOBSY User Chatbot</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 40px;
+    }
+
+    /* BACK BUTTON – TOP LEFT */
+    .back-btn {
+        position: fixed;
+        top: 20px;
+        left: 25px;
+        padding: 8px 14px;
+        background: #1a3b5d;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 9999;
+        transition: 0.25s ease;
+    }
+
+    .back-btn:hover {
+        background: #132c46;
+        transform: translateY(-2px);
+    }
+
+    .chatbot-box {
+        width: 100%;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #chat-output {
+        height: 220px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .faq-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px;
+        margin-bottom: 6px;
+        background: #e8fff1;
+        border: 1px solid #b8e6c8;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .faq-btn:hover {
+        background: #d2f5e3;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- ✅ BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">← Back</a>
+
+<div class="chatbot-box">
+
+    <div id="chat-output">
+        <p><b>JOBSY:</b> Hi! Select a question below 👇</p>
+    </div>
+
+    <!-- USER FAQ QUESTIONS -->
+    {% for faq in faqs %}
+        <button class="faq-btn"
+            onclick="getAnswer('{{ faq.id }}', '{{ faq.question|escapejs }}')">
+            {{ faq.question }}
+        </button>
+    {% endfor %}
+
+</div>
+
+<script>
+const replyUrl = "{% url 'user_chatbot_reply' %}";
+
+function getAnswer(id, question) {
+    document.getElementById("chat-output").innerHTML +=
+        "<p><b>You:</b> " + question + "</p>";
+
+    fetch(replyUrl + "?qid=" + id)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("chat-output").innerHTML +=
+                "<p><b>JOBSY:</b> " + data.reply + "</p>";
+        });
+}
+</script>
+
+</body>
+</html>

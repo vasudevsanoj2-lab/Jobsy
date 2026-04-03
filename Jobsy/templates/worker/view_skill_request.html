@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="364" height="86" border="1">
+  <tr>
+    <td>Skill</td>
+    <td>User</td>
+    <td>Date</td>
+    <td>Action</td>
+  </tr>
+    {% for i in value %}
+  <tr>
+    <td>{{ i.skill.skill }}</td>
+    <td>{{ i.user_id.id }}</td>
+    <td>{{ i.date }}</td>
+    <td>
+         {%  if i.status == 'pending'  %}
+        <p><a href="/accept_skill_request/{{ i.id }}">Accept</a></p>
+    <p><a href="/reject_skill_request/{{ i.id }}">Reject</a></p>
+        {% elif i.status == 'accept' %}
+
+        <p><a href="/update_status/{{ i.id }}">Update</a></p>
+             {% else %}
+                     <p><a href="/update_status/{{ i.id }}">Update</a></p>
+             <p>{{ i.status }}</p>
+
+
+             {% endif %}
+    <p><a href="/send_complaint/{{ i.id }}">Send complaint</a></p>
+    </td>
+  </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JOBSY Chatbot</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 40px;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #0f8f8f;
+        color: #ffffff;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(15, 143, 143, 0.35);
+        transition: 0.25s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    .back-btn:hover {
+        background: #0c6f6f;
+        transform: translateY(-2px);
+    }
+
+    .back-arrow {
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .chatbot-box {
+        width: 1200px;
+        height: 600px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        margin: auto;
+    }
+
+    #chat-output {
+        height: 220px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .faq-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px;
+        margin-bottom: 6px;
+        background: #eef4ff;
+        border: 1px solid #cddcff;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .faq-btn:hover {
+        background: #dbe7ff;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'worker_page' %}" class="back-btn">
+    <span class="back-arrow">&#8592;</span>
+    Back
+</a>
+
+<div class="chatbot-box">
+
+    <div id="chat-output">
+        <p><b>JOBSY:</b> Hi! Select a question below 👇</p>
+    </div>
+
+    <!-- FAQ QUESTIONS -->
+    {% for faq in faqs %}
+        <button class="faq-btn"
+                onclick="getAnswer('{{ faq.id }}', '{{ faq.question|escapejs }}')">
+            {{ faq.question }}
+        </button>
+    {% endfor %}
+
+</div>
+
+<script>
+function getAnswer(id, question) {
+
+    document.getElementById("chat-output").innerHTML +=
+        "<p><b>You:</b> " + question + "</p>";
+
+    fetch("/chatbot-reply/?qid=" + id)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("chat-output").innerHTML +=
+                "<p><b>JOBSY:</b> " + data.reply + "</p>";
+
+            document.getElementById("chat-output").scrollTop =
+                document.getElementById("chat-output").scrollHeight;
+        });
+}
+</script>
+
+</body>
+</html>

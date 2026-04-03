@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Worker Requests</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #eef2f6;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    /* ==============================
+       BACK BUTTON – TOP LEFT
+    ============================== */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #1a3b5d;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(26,59,93,0.25);
+        transition: 0.25s ease;
+        z-index: 999;
+    }
+
+    .back-btn:hover {
+        background: #132c46;
+        transform: translateY(-2px);
+    }
+
+    .container {
+        width: 95%;
+        max-width: 1100px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+        border: 1px solid #dce3eb;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 30px;
+        font-weight: 600;
+        color: #1a3b5d;
+    }
+
+    /* TABLE */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e5e7ec;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    th {
+        background: #1a3b5d;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    tr:hover {
+        background: #f2f7fc;
+        transition: 0.2s;
+    }
+
+    /* ACTION BUTTONS */
+    .action-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 4px;
+        background: #2c8bff;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        transition: 0.25s;
+    }
+
+    .action-btn:hover {
+        background: #1a6bd1;
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- BACK BUTTON -->
+<a href="{% url 'user_page' %}" class="back-btn">&larr; Back</a>
+
+<div class="container">
+    <h2>Worker Task Details</h2>
+
+    <form id="form1" name="form1" method="post" action="">
+        <table>
+            <tr>
+                <th>Worker</th>
+                <th>Skill</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+
+            {% for i in val %}
+            <tr>
+                <td>{{ i.skill.worker_id.name }}</td>
+                <td>{{ i.skill.skill }}</td>
+                <td>{{ i.description }}</td>
+                <td>{{ i.status }}</td>
+                <td>{{ i.date }}</td>
+                <td>
+                    <a href="/send_rating/{{ i.id }}" class="action-btn">Give Rating</a>
+                    <a href="/send_complaint_user/{{ i.id }}" class="action-btn">Send Complaint</a>
+                    <a href="/make_request_payment/{{ i.id }}" class="action-btn">Make Payment</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

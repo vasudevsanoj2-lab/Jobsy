@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="750" height="112" border="1">
+  <tr>
+    <th width="87" height="30" scope="col">name</th>
+    <th width="87" scope="col">phone</th>
+    <th width="87" scope="col">email</th>
+    <th width="88" scope="col">place</th>
+    <th width="86" scope="col">post</th>
+    <th width="87" scope="col">pin</th>
+     <th width="87" scope="col">status</th>
+    <th width="87" scope="col">image</th>
+    <th width="89" scope="col">action</th>
+  </tr>
+    {% for i in value %}
+  <tr>
+    <td> {{ i.name }}</td>
+    <td>&nbsp;{{ i.phoneno }}</td>
+    <td>&nbsp;{{ i.email }}</td>
+    <td>{{ i.place }}&nbsp;</td>
+    <td>&nbsp;{{ i.post }}</td>
+    <td>{{ i.pin }}&nbsp;</td>
+    <td>&nbsp;{{ i.status }}</td>
+    <td><img src="{{i.image.url}}" height="100"></td>
+    <td><p><a href="/accept_worker/{{ i.LOGIN_id.id }}">accept</a></p>
+    <p><a href="/reject_worker/{{ i.LOGIN_id.id }}">reject</a></p></td>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>

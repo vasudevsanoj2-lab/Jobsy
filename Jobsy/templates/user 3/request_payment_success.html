@@ -1,0 +1,7 @@
+<h2>Payment Successful!</h2>
+<p>Worker: {{ request_obj.skill.worker_id.name }}</p>
+<p>Skill: {{ request_obj.skill.skill }}</p>
+<p>Status: {{ request_obj.status }}</p>
+<h3>Amount Paid: ₹{{ amount }}</h3>
+
+<a href="{% url 'view_request_status_user' %}">Back to Requests</a>

@@ -1,0 +1,207 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Worker Details</title>#}
+{##}
+{#    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">#}
+{##}
+{#    <style>#}
+{#        body {#}
+{#            font-family: "Poppins", sans-serif;#}
+{#            background: #eef2f6;#}
+{#            padding: 40px;#}
+{#        }#}
+{##}
+{#        .card {#}
+{#            max-width: 600px;#}
+{#            margin: auto;#}
+{#            background: #fff;#}
+{#            padding: 30px;#}
+{#            border-radius: 16px;#}
+{#            box-shadow: 0 5px 20px rgba(0,0,0,0.1);#}
+{#        }#}
+{##}
+{#        h2 {#}
+{#            text-align: center;#}
+{#            color: #1a3b5d;#}
+{#            margin-bottom: 25px;#}
+{#        }#}
+{##}
+{#        .detail {#}
+{#            margin-bottom: 12px;#}
+{#            font-size: 15px;#}
+{#        }#}
+{##}
+{#        .detail span {#}
+{#            font-weight: 600;#}
+{#            color: #1a3b5d;#}
+{#        }#}
+{##}
+{#        img {#}
+{#            width: 120px;#}
+{#            height: 120px;#}
+{#            object-fit: cover;#}
+{#            border-radius: 50%;#}
+{#            display: block;#}
+{#            margin: 0 auto 20px;#}
+{#        }#}
+{##}
+{#        .back-btn {#}
+{#            display: inline-block;#}
+{#            margin-top: 20px;#}
+{#            padding: 8px 16px;#}
+{#            background: #1a3b5d;#}
+{#            color: #fff;#}
+{#            text-decoration: none;#}
+{#            border-radius: 8px;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<div class="card">#}
+{#    <h2>Worker Details</h2>#}
+{##}
+{#    {% if worker.image %}#}
+{#        <img src="{{ worker.request.skill.worker_id.image.url }}" alt="Worker Image">#}
+{#    {% endif %}#}
+{##}
+{#    <div class="detail"><span>Name:</span> {{ worker.request.skill.worker_id.name }}</div>#}
+{#    <div class="detail"><span>Email:</span> {{ worker.request.skill.worker_id.email }}</div>#}
+{#    <div class="detail"><span>Phone:</span> {{ worker.request.skill.worker_id.phoneno }}</div>#}
+{#    <div class="detail"><span>Place:</span> {{ worker.request.skill.worker_id.place }}</div>#}
+{#    <div class="detail"><span>Post:</span> {{ worker.request.skill.worker_id.post }}</div>#}
+{#    <div class="detail"><span>PIN:</span> {{ worker.request.skill.worker_id.pin }}</div>#}
+{#    <div class="detail"><span>Status:</span> {{ worker.request.skill.worker_id.status }}</div>#}
+{#   <a href="javascript:history.back()" class="back-btn">← Back</a>#}
+{#  {% if worker.request.skill.worker_id.LOGIN.type == 'worker' %}#}
+{#    <a href="/admin_block_worker/{{ worker.request.skill.worker_id.id }}" class="back-btn">Block</a>#}
+{#{% elif worker.request.skill.worker_id.LOGIN.type == 'blocked' %}#}
+{#    <a href="/admin_unblock_worker/{{ worker.request.skill.worker_id.id }}" class="back-btn">Unblock</a>#}
+{#{% endif %}#}
+{##}
+{#</div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Worker Details</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #eef2f6;
+            padding: 40px;
+        }
+
+        /* HOME BUTTON – TOP RIGHT */
+        .home-btn {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            padding: 10px 16px;
+            background: #1a3b5d;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: 0.25s ease;
+            z-index: 9999;
+        }
+
+        .home-btn:hover {
+            background: #132c46;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1a3b5d;
+            margin-bottom: 25px;
+        }
+
+        .detail {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .detail span {
+            font-weight: 600;
+            color: #1a3b5d;
+        }
+
+        img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 16px;
+            background: #1a3b5d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ HOME BUTTON -->
+<a href="{% url 'admin_page' %}" class="home-btn">🏠 HOME</a>
+
+<div class="card">
+    <h2>Worker Details</h2>
+
+    {% if worker.image %}
+        <img src="{{ worker.request.skill.worker_id.image.url }}" alt="Worker Image">
+    {% endif %}
+
+    <div class="detail"><span>Name:</span> {{ worker.request.skill.worker_id.name }}</div>
+    <div class="detail"><span>Email:</span> {{ worker.request.skill.worker_id.email }}</div>
+    <div class="detail"><span>Phone:</span> {{ worker.request.skill.worker_id.phoneno }}</div>
+    <div class="detail"><span>Place:</span> {{ worker.request.skill.worker_id.place }}</div>
+    <div class="detail"><span>Post:</span> {{ worker.request.skill.worker_id.post }}</div>
+    <div class="detail"><span>PIN:</span> {{ worker.request.skill.worker_id.pin }}</div>
+    <div class="detail"><span>Status:</span> {{ worker.request.skill.worker_id.status }}</div>
+
+    <a href="javascript:history.back()" class="back-btn">← Back</a>
+
+    {% if worker.request.skill.worker_id.LOGIN.type == 'worker' %}
+        <a href="/admin_block_worker/{{ worker.request.skill.worker_id.id }}" class="back-btn">Block</a>
+    {% elif worker.request.skill.worker_id.LOGIN.type == 'blocked' %}
+        <a href="/admin_unblock_worker/{{ worker.request.skill.worker_id.id }}" class="back-btn">Unblock</a>
+    {% endif %}
+</div>
+
+</body>
+</html>
+

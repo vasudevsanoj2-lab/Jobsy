@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Worker Approval Cards</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Poppins", sans-serif;
+        background: #eef2f6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        color: #333;
+    }
+
+    /* BACK BUTTON – TOP LEFT */
+    .back-btn {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        padding: 10px 18px;
+        background: #1a3b5d;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: 0.25s ease;
+        z-index: 9999;
+    }
+
+    .back-btn:hover {
+        background: #132c46;
+        transform: translateY(-2px);
+    }
+
+    .container {
+        width: 95%;
+        max-width: 1400px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #1a3b5d;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 55px;
+        padding: 15px;
+    }
+
+    .card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border: 1px solid #dfe5ec;
+        text-align: center;
+    }
+
+    .card img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 2px solid #d0d7de;
+        margin-bottom: 15px;
+    }
+
+    .details p {
+        margin: 6px 0;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .details span {
+        font-weight: 600;
+        color: #1a3b5d;
+    }
+
+    .actions {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        color: #ffffff;
+        transition: 0.25s;
+    }
+
+    .accept {
+        background: #2d8a5d;
+    }
+
+    .accept:hover {
+        background: #236b49;
+    }
+
+    .reject {
+        background: #d64545;
+    }
+
+    .reject:hover {
+        background: #b63636;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- ✅ BACK BUTTON → ADMIN PAGE -->
+<a href="{% url 'admin_page' %}" class="back-btn">← Back</a>
+
+<div class="container">
+
+    <h2>Worker Details</h2>
+
+    <div class="card-grid">
+        {% for i in value %}
+        <div class="card">
+
+            <img src="{{ i.image.url }}" alt="Worker Image">
+
+            <div class="details">
+                <p><span>Name:</span> {{ i.name }}</p>
+                <p><span>Phone:</span> {{ i.phoneno }}</p>
+                <p><span>Email:</span> {{ i.email }}</p>
+                <p><span>Place:</span> {{ i.place }}</p>
+                <p><span>Post:</span> {{ i.post }}</p>
+                <p><span>Pin:</span> {{ i.pin }}</p>
+                <p><span>Status:</span> {{ i.status }}</p>
+            </div>
+
+            <div class="actions">
+                {% if i.LOGIN.type == 'pending' %}
+                    <a href="/accept_worker/{{ i.LOGIN.id }}" class="btn accept">Accept</a>
+                    <a href="/reject_worker/{{ i.LOGIN.id }}" class="btn reject">Reject</a>
+                {% else %}
+                    <p>{{ i.LOGIN.type }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

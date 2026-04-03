@@ -1,0 +1,506 @@
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8" />#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1.0" />#}
+{#<title>Worker Dashboard</title>#}
+{##}
+{#<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">#}
+{##}
+{#<style>#}
+{#:root {#}
+{#    --bg: #0f0f16;#}
+{#    --text: #fff;#}
+{#    --card: rgba(255,255,255,0.08);#}
+{#    --border: rgba(255,255,255,0.15);#}
+{#    --accent: #4da3ff;#}
+{#    --danger: #e55353;#}
+{#}#}
+{##}
+{#body.light {#}
+{#    --bg: #f4f4f4;#}
+{#    --text: #111;#}
+{#    --card: rgba(0,0,0,0.07);#}
+{#    --border: rgba(0,0,0,0.20);#}
+{#    --accent: #ffb84d;#}
+{#}#}
+{##}
+{#body {#}
+{#    margin: 0;#}
+{#    background: var(--bg);#}
+{#    color: var(--text);#}
+{#    font-family: "Inter", system-ui, sans-serif;#}
+{#    overflow-x: hidden;#}
+{#}#}
+{##}
+{#/* 🔴 LOGOUT – SLIGHTLY BIGGER */#}
+{#.logout-top {#}
+{#    position: fixed;#}
+{#    top: 20px;#}
+{#    right: 20px;#}
+{#    padding: 16px 32px;     /* increased */#}
+{#    background: var(--danger);#}
+{#    color: #fff;#}
+{#    font-size: 17px;        /* increased */#}
+{#    font-weight: 600;#}
+{#    border-radius: 14px;    /* slightly rounder */#}
+{#    text-decoration: none;#}
+{#    z-index: 2000;#}
+{#    transition: background 0.2s ease, transform 0.2s ease;#}
+{#}#}
+{##}
+{#.logout-top:hover {#}
+{#    background: #d64545;#}
+{#    transform: translateY(-1px);#}
+{#}#}
+{##}
+{#/* THEME SWITCH */#}
+{#.theme-switch {#}
+{#    position: fixed;#}
+{#    top: 20px;#}
+{#    left: 20px;#}
+{#    width: 70px;#}
+{#    height: 34px;#}
+{#    border-radius: 50px;#}
+{#    background: var(--card);#}
+{#    border: 1px solid var(--border);#}
+{#    display: flex;#}
+{#    align-items: center;#}
+{#    padding: 3px;#}
+{#    cursor: pointer;#}
+{#    z-index: 1000;#}
+{#}#}
+{#.switch-ball {#}
+{#    width: 28px;#}
+{#    height: 28px;#}
+{#    background: var(--text);#}
+{#    border-radius: 50%;#}
+{#    transition: transform 0.3s ease;#}
+{#}#}
+{#body.light .switch-ball {#}
+{#    transform: translateX(36px);#}
+{#}#}
+{##}
+{#/* HERO */#}
+{#.hero {#}
+{#    height: 900px;#}
+{#    background: url("static/images/collage.png") center/cover no-repeat;#}
+{#    position: relative;#}
+{#}#}
+{##}
+{#/* HERO CONTENT */#}
+{#.hero-content {#}
+{#    position: absolute;#}
+{#    top: 40%;#}
+{#    left: 50%;#}
+{#    transform: translate(-50%, -50%);#}
+{#    text-align: center;#}
+{#}#}
+{##}
+{#/* FUNCTIONS */#}
+{#.function-grid {#}
+{#    display: flex;#}
+{#    flex-direction: column;#}
+{#    gap: 30px;#}
+{#    margin-bottom: 34px;#}
+{#    margin-top: -10px;#}
+{#}#}
+{##}
+{#.function-row {#}
+{#    display: flex;#}
+{#    justify-content: center;#}
+{#    gap: 28px;#}
+{#}#}
+{##}
+{#.func-btn {#}
+{#    padding: 20px 30px;#}
+{#    background: rgba(0,0,0,0.55);#}
+{#    border: 1px solid var(--border);#}
+{#    border-radius: 18px;#}
+{#    font-size: 19px;#}
+{#    font-weight: 600;#}
+{#    color: white;#}
+{#    text-decoration: none;#}
+{#    white-space: nowrap;#}
+{#    backdrop-filter: blur(6px);#}
+{#    transition: 0.25s ease;#}
+{#}#}
+{##}
+{#.func-btn:hover {#}
+{#    border-color: var(--accent);#}
+{#    transform: translateY(-3px);#}
+{#}#}
+{##}
+{#/* HERO TEXT */#}
+{#.hero-title {#}
+{#    font-size: 95px;#}
+{#    font-weight: 900;#}
+{#    margin: -18px 0 0;#}
+{#    color: white;#}
+{#}#}
+{#.hero-sub {#}
+{#    margin-top: 28px;#}
+{#    font-size: 26px;#}
+{#    font-weight: 300;#}
+{#    color: black;#}
+{#}#}
+{##}
+{#/* ABOUT */#}
+{#.about-jobsy {#}
+{#    max-width: 950px;#}
+{#    margin: 70px auto 10px;#}
+{#    padding: 0 20px;#}
+{#    text-align: center;#}
+{#}#}
+{#.about-title {#}
+{#    font-size: 45px;#}
+{#    font-weight: 800;#}
+{#    margin-bottom: 18px;#}
+{#}#}
+{#.about-text {#}
+{#    font-size: 20px;#}
+{#    line-height: 32px;#}
+{#    opacity: 0.9;#}
+{#}#}
+{##}
+{#/* IMAGE STRIP */#}
+{#.banner-strip {#}
+{#    padding: 60px 10px;#}
+{#    display: flex;#}
+{#    flex-wrap: wrap;#}
+{#    justify-content: center;#}
+{#    gap: 40px;#}
+{#}#}
+{#.strip-img {#}
+{#    width: 350px;#}
+{#    height: 230px;#}
+{#    object-fit: cover;#}
+{#    border-radius: 18px;#}
+{#}#}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body class="light">#}
+{##}
+{#<!-- LOGOUT -->#}
+{#<a href="/logout" class="logout-top">LOGOUT</a>#}
+{##}
+{#<!-- THEME SWITCH -->#}
+{#<div class="theme-switch" onclick="document.body.classList.toggle('light')">#}
+{#    <div class="switch-ball"></div>#}
+{#</div>#}
+{##}
+{#<!-- HERO -->#}
+{#<div class="hero">#}
+{#    <div class="hero-content">#}
+{##}
+{#        <div class="function-grid">#}
+{#            <div class="function-row">#}
+{#                <a href="/manage_skill_worker" class="func-btn">Manage Skills</a>#}
+{#                <a href="/view_rating" class="func-btn">View Ratings</a>#}
+{#                <a href="/view_skill_request" class="func-btn">View Skill Requests</a>#}
+{#                <a href="/send_feedback_worker" class="func-btn">Send Feedback</a>#}
+{#                <a href="/view_payment" class="func-btn">View Payments</a>#}
+{#                <a href="/view_workdetails" class="func-btn">Work Details</a>#}
+{#            </div>#}
+{##}
+{#            <div class="function-row">#}
+{#                <a href="/worker_chat_withuser" class="func-btn">Chat</a>#}
+{#                <a href="/view_complaint_worker" class="func-btn">View Complaints</a>#}
+{#                <a href="/view_workrequest_status" class="func-btn">Request Status</a>#}
+{#                <a href="/worker_view_feedback" class="func-btn">View Feedback</a>#}
+{#                <a href="/chatbot/" class="func-btn">Chatbot</a>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <h1 class="hero-title">Worker Dashboard</h1>#}
+{#        <p class="hero-sub">Daily Wage Workers • Skilled Jobs • Jobsy</p>#}
+{##}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<!-- ABOUT -->#}
+{#<div class="about-jobsy">#}
+{#    <h2 class="about-title">About Jobsy</h2>#}
+{#    <p class="about-text">#}
+{#        Jobsy is a platform designed to connect daily wage workers and skilled professionals#}
+{#        with real job opportunities in their local area. It helps workers showcase their skills,#}
+{#        build a verified profile, and access fair and transparent job requests.#}
+{#        Jobsy ensures smooth communication between workers and employers, making it easier to find#}
+{#        reliable work without middlemen. The platform also helps workers track their ratings, payments,#}
+{#        and job history, empowering them with better control over their livelihood.#}
+{#    </p>#}
+{#</div>#}
+{##}
+{#<!-- IMAGES -->#}
+{#<div class="banner-strip">#}
+{#    <img class="strip-img" src="static/images/BACK1.jpg">#}
+{#    <img class="strip-img" src="static/images/household.jpg">#}
+{#    <img class="strip-img" src="static/images/plumbing.jpg">#}
+{#</div>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Worker Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0f0f16;
+    --text: #fff;
+    --card: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.15);
+    --accent: #4da3ff;
+    --danger: #e55353;
+}
+
+body.light {
+    --bg: #f4f4f4;
+    --text: #111;
+    --accent: #ffb84d;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+/* FUNCTIONS (TEXT ONLY) */
+.nav-links {
+    display: flex;
+    gap: 34px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    position: relative;
+    padding-bottom: 4px;
+}
+
+/* UNDERLINE EFFECT */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* LOGOUT */
+.logout-top {
+    position: absolute;
+    right: 20px;
+    padding: 12px 26px;
+    background: var(--danger);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 14px;
+    text-decoration: none;
+}
+
+/* THEME SWITCH */
+.theme-switch {
+    position: absolute;
+    left: 20px;
+    width: 70px;
+    height: 34px;
+    border-radius: 50px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    cursor: pointer;
+}
+.switch-ball {
+    width: 28px;
+    height: 28px;
+    background: var(--text);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+body.light .switch-ball {
+    transform: translateX(36px);
+}
+
+/* ================= HERO ================= */
+.hero {
+    height: 900px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.hero-slider img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+.hero-slider img.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 95px;
+    font-weight: 900;
+    color: white;
+}
+
+.hero-sub {
+    margin-top: 28px;
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+}
+
+/* ================= ABOUT ================= */
+.about-jobsy {
+    max-width: 950px;
+    margin: 70px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+.about-title {
+    font-size: 45px;
+    font-weight: 800;
+}
+.about-text {
+    font-size: 20px;
+    line-height: 32px;
+}
+
+/* ================= IMAGE STRIP ================= */
+.banner-strip {
+    padding: 60px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+.strip-img {
+    width: 350px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 18px;
+}
+</style>
+</head>
+
+<body class="light">
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="theme-switch" onclick="document.body.classList.toggle('light')">
+        <div class="switch-ball"></div>
+    </div>
+
+    <div class="nav-links">
+        <a href="/manage_skill_worker">Manage Skills</a>
+         <a href="/view_skill_request">Skill Requests</a>
+        <a href="/view_rating">Ratings</a>
+        <a href="/send_feedback_worker">Feedback</a>
+        <a href="/view_payment">Payments</a>
+        <a href="/view_workdetails">Work Details</a>
+        <a href="/view_workrequest_status">Request Status</a>
+        <a href="/worker_chat_withuser">Chat</a>
+        <a href="/view_complaint_worker">Complaints</a>
+        <a href="/chatbot/">Chatbot</a>
+        <a href="/worker_view_feedback">feedbacks</a>
+        <a href="/incomingcomplaintworker">Incoming complaints</a>
+    </div>
+
+    <a href="/logout" class="logout-top">LOGOUT</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-slider">
+        <img src="static/images/3.jpg" class="active">
+        <img src="static/images/5.jpg">
+        <img src="static/images/6.jpg">
+    </div>
+
+    <div class="hero-content">
+        <h1 class="hero-title">Worker Dashboard</h1>
+        <p class="hero-sub">Daily Wage Workers • Skilled Jobs • Jobsy</p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-jobsy">
+    <h2 class="about-title">About Jobsy</h2>
+    <p class="about-text">
+        Jobsy is a platform designed to connect daily wage workers and skilled professionals
+        with real job opportunities in their local area. It helps workers showcase their skills,
+        build a verified profile, and access fair and transparent job requests.
+    </p>
+</div>
+
+<!-- IMAGE STRIP -->
+<div class="banner-strip">
+    <img class="strip-img" src="static/images/BACK1.jpg">
+    <img class="strip-img" src="static/images/household.jpg">
+    <img class="strip-img" src="static/images/plumbing.jpg">
+</div>
+
+<script>
+const slides = document.querySelectorAll('.hero-slider img');
+let current = 0;
+
+setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}, 4000);
+</script>
+
+</body>
+</html>
